@@ -1,9 +1,10 @@
 <script>
   import SpeechBubble from "./SpeechBubble.svelte";
+
 </script>
 
 <div class="avatar-container">
-  <SpeechBubble message="You suck"/>
+  <SpeechBubble/>
   <div class="avatar">
     <div class="head">
       <div class="eye-line">

@@ -24,11 +24,9 @@
     async function  handleClick(index) {
         gameStore.makeMove(index);
         const chat = get(gameStore).chat;
-        const response = await getMove(chat);
-        const computerMove = getComputerMove(get(gameStore));
-        if (computerMove !== undefined) {
-            gameStore.makeMove(computerMove);
-        }
+        const {move, message} = await getMove(chat);
+        gameStore.setMessage(message);
+        gameStore.makeMove(move-1);
     }
 </script>
 

@@ -9,6 +9,8 @@ function createGameStore() {
         winner: null,
         isDraw: false,
         chat: initialChat,
+        takenPositions: [],
+        currentMessage: '',
     });
 
     return {
@@ -24,24 +26,34 @@ function createGameStore() {
             const winner = calculateWinner(newBoard);
             const isDraw = !winner && newBoard.every(cell => cell !== null);
 
-            const newMessage = { role:'user', content: JSON.stringify({ move:1, takenPositions:[1]})};
+            const newTakenPositions = [...state.takenPositions, index + 1];
+            const newMessage = { role:'user', content: JSON.stringify({ move: index + 1, takenPositions:newTakenPositions})};
             const newChat ={ ...state.chat, messages: [...state.chat.messages, newMessage]};
 
             return {
+                ...state,
                 board: newBoard,
                 currentPlayer: state.currentPlayer === 'X' ? 'O' : 'X',
                 winner,
                 isDraw,
                 chat: newChat,
+                takenPositions: newTakenPositions,
             };
         }),
 
+        setMessage: (message) => update(state => {
+            return {
+                ...state, currentMessage: message,
+            }
+        }),
         reset: () => set({
             board: Array(9).fill(null),
             currentPlayer: 'X',
             winner: null,
             isDraw: false,
             chat: initialChat,
+            takenPositions: [],
+            currentMessage:'',
         })
     };
 }

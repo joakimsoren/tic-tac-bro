@@ -1,10 +1,12 @@
 <script>
-export let message;
+    import { gameStore } from '../stores/game-store';
 
 </script>
+{#if !!$gameStore.currentMessage}
 <div class="speech-bubble">
-  {message}
+  {$gameStore.currentMessage}
 </div>
+{/if}
 
 <style>
   .speech-bubble {
