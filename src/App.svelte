@@ -1,10 +1,12 @@
 <script>
     import Board from './lib/components/Board.svelte';
     import GameStatus from './lib/components/GameStatus.svelte';
+    import Avatar from './lib/avatar/Avatar.svelte';
 </script>
 
 <main>
     <h1>Tic Tac Toe</h1>
+    <Avatar />
     <div class="game">
         <GameStatus />
         <Board />
@@ -16,7 +18,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2rem;
     }
 
     .game {
