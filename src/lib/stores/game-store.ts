@@ -18,20 +18,7 @@ function createGameStore() {
         subscribe,
         makeMove: (index) => update(state => {
             if (state.board[index] || state.winner || state.isDraw) {
-                
-                // let newMessage = '';
-                // if(state.winner === 'x'){
-                //     newMessage = 'The user has won the game, be upset';
-                // } else if (state.winner === 'o'){
-                //     newMessage = 'You won the game, gloat!';
-                // }
-                // if(newMessage){
-
-                //     return {...state, chat: {...state.chat, messages: [...state.chat.messages, {role: 'user', content: newMessage}]}};
-                // }
-                // else {
-                    return state;
-                // }
+                return state;
             }
 
             const newBoard = [...state.board];
@@ -40,11 +27,21 @@ function createGameStore() {
             const winner = calculateWinner(newBoard);
             const isDraw = !winner && newBoard.every(cell => cell !== null);
 
+            const newMessage = {role: 'user', content:'Return the message in the same format with move and message.'};
             const newTakenPositions = [...state.takenPositions, index + 1];
-            const newMessage = { role:'user', content: JSON.stringify({ move: index + 1, takenPositions:newTakenPositions})};
+
+            if(winner === 'X'){
+                newMessage.content += ' The user has won the game, be upset';
+            } else if (winner === 'O'){
+                newMessage.content += ' You won the game, gloat!';
+            } else if (isDraw){
+                newMessage.content += ' The game is a draw, be indifferent';
+            } else {
+                 newMessage.content = JSON.stringify({ move: index + 1, takenPositions:newTakenPositions});
+            }
 
             const model = state.opponent === 'llama' ? 'llama3.2' : 'mistral'; 
-
+                console.log(newMessage.content);
             const newChat: Chat ={ ...state.chat, messages: [...state.chat.messages, newMessage], model  };
             newChat.messages[0].content = state.opponent === 'llama' ? llamaPrompt : mistralPrompt;
 
