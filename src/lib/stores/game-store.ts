@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
-import {body} from '../api/constants';
+import {initialChat} from '../api/constants';
+import type { Chat } from '../api/body';
 
 function createGameStore() {
     const { subscribe, set, update } = writable({
@@ -7,7 +8,7 @@ function createGameStore() {
         currentPlayer: 'X',
         winner: null,
         isDraw: false,
-        chat: body,
+        chat: initialChat,
     });
 
     return {
@@ -23,12 +24,15 @@ function createGameStore() {
             const winner = calculateWinner(newBoard);
             const isDraw = !winner && newBoard.every(cell => cell !== null);
 
+            const newMessage = { role:'user', content: JSON.stringify({ move:1, takenPositions:[1]})};
+            const newChat ={ ...state.chat, messages: [...state.chat.messages, newMessage]};
+
             return {
                 board: newBoard,
                 currentPlayer: state.currentPlayer === 'X' ? 'O' : 'X',
                 winner,
                 isDraw,
-                chat: state.chat,
+                chat: newChat,
             };
         }),
 
@@ -37,7 +41,7 @@ function createGameStore() {
             currentPlayer: 'X',
             winner: null,
             isDraw: false,
-            chat: body,
+            chat: initialChat,
         })
     };
 }

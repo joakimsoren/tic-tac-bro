@@ -2,6 +2,7 @@
     import Square from './Square.svelte';
     import { gameStore } from '../stores/game-store';
     import { get } from 'svelte/store';
+    import {getMove} from '../api/api';
 
 
     function getComputerMove(gameStore) {
@@ -20,8 +21,10 @@
         return index;
     }
 
-    function handleClick(index) {
+    async function  handleClick(index) {
         gameStore.makeMove(index);
+        const chat = get(gameStore).chat;
+        const response = await getMove(chat);
         const computerMove = getComputerMove(get(gameStore));
         if (computerMove !== undefined) {
             gameStore.makeMove(computerMove);

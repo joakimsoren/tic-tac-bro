@@ -1,5 +1,8 @@
-export interface Body {
+export interface Chat {
   model:string;
-  messages: {role: 'user' | 'assistant', content: string | {move: number, message?:string, takenPositions?:number[]}}[]
+  messages: {
+    role: string, 
+    content: string | { move: number, message?: string, takenPositions? :number[] }
+  }[]
   stream: boolean;
 }
