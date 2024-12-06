@@ -1,11 +1,13 @@
 import { writable } from 'svelte/store';
+import {body} from '../api/constants';
 
 function createGameStore() {
     const { subscribe, set, update } = writable({
         board: Array(9).fill(null),
         currentPlayer: 'X',
         winner: null,
-        isDraw: false
+        isDraw: false,
+        chat: body,
     });
 
     return {
@@ -25,14 +27,17 @@ function createGameStore() {
                 board: newBoard,
                 currentPlayer: state.currentPlayer === 'X' ? 'O' : 'X',
                 winner,
-                isDraw
+                isDraw,
+                chat: state.chat,
             };
         }),
+
         reset: () => set({
             board: Array(9).fill(null),
             currentPlayer: 'X',
             winner: null,
-            isDraw: false
+            isDraw: false,
+            chat: body,
         })
     };
 }

@@ -41,8 +41,8 @@
 <style>
     .board {
         display: grid;
-        grid-template-columns: repeat(3, 60px);
-        grid-template-rows: repeat(3, 60px);
+        grid-template-columns: repeat(3, 80px);
+        grid-template-rows: repeat(3, 80px);
         gap: 4px;
         margin: 20px 0;
         background-color: #213547;

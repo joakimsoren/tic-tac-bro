@@ -5,11 +5,13 @@
 </script>
 
 <main>
-    <h1>Tic Tac Toe</h1>
-    <Avatar />
-    <div class="game">
-        <GameStatus />
-        <Board />
+    <h1>Tic Tac Bro</h1>
+    <div class="game-container">
+        <div class="game">
+            <GameStatus />
+            <Board />
+        </div>
+        <Avatar />
     </div>
 </main>
 
@@ -17,7 +19,13 @@
     main {
         display: flex;
         flex-direction: column;
+    }
+
+    .game-container{
+        display: flex;
+        flex-direction: row;
         align-items: center;
+        justify-content: space-evenly;
     }
 
     .game {

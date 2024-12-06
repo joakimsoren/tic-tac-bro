@@ -8,7 +8,11 @@
     {:else if $gameStore.isDraw}
         <p>Game ended in a draw!</p>
     {:else}
-        <p>Next player: {$gameStore.currentPlayer}</p>
+    {#if $gameStore.currentPlayer === 'O'}
+        <p>Waiting for opponent</p>
+    {:else}
+        <p>Your turn! </p>
+    {/if}
     {/if}
 </div>
 
