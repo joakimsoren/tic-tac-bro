@@ -9,7 +9,17 @@
         const chat = get(gameStore).chat;
         const {move, message} = await getMove(chat);
         gameStore.setMessage(message);
+        const { winner} = get(gameStore);
+        if(winner === 'X'){
+            return;
+        }
         gameStore.makeMove(move-1);
+        const {winner: newWinner} = get(gameStore);
+        if(newWinner === 'O'){
+            const newChat = get(gameStore).chat;
+            const { message } = await getMove(newChat);
+            gameStore.setMessage(message);
+        }
     }
 </script>
 

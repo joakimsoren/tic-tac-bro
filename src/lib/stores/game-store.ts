@@ -41,7 +41,6 @@ function createGameStore() {
             }
 
             const model = state.opponent === 'llama' ? 'llama3.2' : 'mistral'; 
-                console.log(newMessage.content);
             const newChat: Chat ={ ...state.chat, messages: [...state.chat.messages, newMessage], model  };
             newChat.messages[0].content = state.opponent === 'llama' ? llamaPrompt : mistralPrompt;
 
