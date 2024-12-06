@@ -11,6 +11,7 @@ function createGameStore() {
         chat: initialChat,
         takenPositions: [],
         currentMessage: '',
+        opponent:'',
     });
 
     return {
@@ -28,7 +29,10 @@ function createGameStore() {
 
             const newTakenPositions = [...state.takenPositions, index + 1];
             const newMessage = { role:'user', content: JSON.stringify({ move: index + 1, takenPositions:newTakenPositions})};
-            const newChat ={ ...state.chat, messages: [...state.chat.messages, newMessage]};
+
+            const model = state.opponent === 'llama' ? 'llama3.2' : 'mistral'; 
+
+            const newChat: Chat ={ ...state.chat, messages: [...state.chat.messages, newMessage], model  };
 
             return {
                 ...state,
@@ -46,6 +50,10 @@ function createGameStore() {
                 ...state, currentMessage: message,
             }
         }),
+
+        setOpponent: (opponent) => update(state => {
+            return {...state, opponent}
+        }),
         reset: () => set({
             board: Array(9).fill(null),
             currentPlayer: 'X',
@@ -54,6 +62,7 @@ function createGameStore() {
             chat: initialChat,
             takenPositions: [],
             currentMessage:'',
+            opponent:'',
         })
     };
 }

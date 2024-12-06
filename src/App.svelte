@@ -2,10 +2,13 @@
     import Board from './lib/components/Board.svelte';
     import GameStatus from './lib/components/GameStatus.svelte';
     import Avatar from './lib/avatar/Avatar.svelte';
+    import {gameStore} from './lib/stores/game-store';
+    import OpponentPicker from './lib/components/OpponentPicker.svelte';
 </script>
 
 <main>
     <h1>Tic Tac Bro</h1>
+    {#if !!$gameStore.opponent}
     <div class="game-container">
         <div class="game">
             <GameStatus />
@@ -13,6 +16,9 @@
         </div>
         <Avatar />
     </div>
+    {:else}
+    <OpponentPicker />
+    {/if}
 </main>
 
 <style>

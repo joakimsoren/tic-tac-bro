@@ -15,7 +15,7 @@
 	border-radius: .4em;
   padding: 20px;
   width: 200px;
-  right: -220px;
+  right: -160px;
 }
 
 .speech-bubble:after {
