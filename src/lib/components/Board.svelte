@@ -1,9 +1,31 @@
 <script>
     import Square from './Square.svelte';
     import { gameStore } from '../stores/game-store';
+    import { get } from 'svelte/store';
+
+
+    function getComputerMove(gameStore) {
+        if (gameStore.currentPlayer === 'X') {
+            return;
+        }
+
+        const availableSquares = gameStore.board
+            .map((square, index) => square === null ? index : null)
+            .filter(index => index !== null);
+
+            // replace this random move with a move gotten from the local api
+        const randomIndex = Math.floor(Math.random() * availableSquares.length);
+        const index = availableSquares[randomIndex];
+
+        return index;
+    }
 
     function handleClick(index) {
         gameStore.makeMove(index);
+        const computerMove = getComputerMove(get(gameStore));
+        if (computerMove) {
+            gameStore.makeMove(computerMove);
+        }
     }
 </script>
 
