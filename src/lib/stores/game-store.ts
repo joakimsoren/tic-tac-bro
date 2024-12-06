@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import {initialChat} from '../api/constants';
+import {initialChat, llamaPrompt, mistralPrompt} from '../api/constants';
 import type { Chat } from '../api/body';
 
 function createGameStore() {
@@ -18,7 +18,20 @@ function createGameStore() {
         subscribe,
         makeMove: (index) => update(state => {
             if (state.board[index] || state.winner || state.isDraw) {
-                return state;
+                
+                // let newMessage = '';
+                // if(state.winner === 'x'){
+                //     newMessage = 'The user has won the game, be upset';
+                // } else if (state.winner === 'o'){
+                //     newMessage = 'You won the game, gloat!';
+                // }
+                // if(newMessage){
+
+                //     return {...state, chat: {...state.chat, messages: [...state.chat.messages, {role: 'user', content: newMessage}]}};
+                // }
+                // else {
+                    return state;
+                // }
             }
 
             const newBoard = [...state.board];
@@ -33,6 +46,7 @@ function createGameStore() {
             const model = state.opponent === 'llama' ? 'llama3.2' : 'mistral'; 
 
             const newChat: Chat ={ ...state.chat, messages: [...state.chat.messages, newMessage], model  };
+            newChat.messages[0].content = state.opponent === 'llama' ? llamaPrompt : mistralPrompt;
 
             return {
                 ...state,

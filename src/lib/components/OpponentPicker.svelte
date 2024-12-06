@@ -7,15 +7,17 @@
 </script>
 
 
-<h1>Pick your opponent</h1>
+<h2>Pick your opponent</h2>
 <div class="opponents">
-  <div>
+  <div class="opponent-wrapper">
     <img class="opponent" src="llama.webp" on:click={() => selectOpponent('llama')} alt="llama"/>
-    <caption>The ultimate frat bro with an insufferable attitude, never seen without his Meta smart glasses that he won't shut up about. This party animal brings obnoxious energy, lame jokes, and annoying shenanigans to every scene - especially when challenging people to games of tic-tac-toe that he insists on playing through his glasses. A big fan of crypto and Mark Zuckerberg, he's always ready to brag about the next big thing while making his next move in the game.</caption>
+    <p><b>Llama</b></p>
+    <p>The ultimate frat bro with an insufferable attitude</p>
   </div>
-  <div>
+  <div class="opponent-wrapper">
     <img class="opponent" src="mistral.webp" on:click={() => selectOpponent('mistral')} alt="mistral"/> 
-    <caption>A mystical player who approaches the sacred grid with ethereal wisdom. Sees the game board not as nine mere squares, but as a cosmic alignment of energies waiting to be channeled. Views X's and O's as ancient symbols of duality dancing through the divine patterns of fate.</caption>
+    <p><b>Mistral</b></p>
+    <p>A mystical player who approaches the sacred grid with ethereal wisdom</p>
   </div>
 </div>
 
@@ -33,8 +35,18 @@
 .opponent:hover{
   border-color:  yellow;
 }
-caption{
-  width:300px;
-  text-align: left;
+.opponent-wrapper{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width:50%;
+  padding: 20px;
 }
+h2 {
+        color: #ff3e00;
+        text-transform: uppercase;
+        font-size:1.5em;
+        font-weight: 100;
+        margin-bottom: 1em;
+    }
 </style>
