@@ -4,23 +4,6 @@
     import { get } from 'svelte/store';
     import {getMove} from '../api/api';
 
-
-    function getComputerMove(gameStore) {
-        if (gameStore.currentPlayer === 'X') {
-            return;
-        }
-
-        const availableSquares = gameStore.board
-            .map((square, index) => square === null ? index : null)
-            .filter(index => index !== null);
-
-            // replace this random move with a move gotten from the local api
-        const randomIndex = Math.floor(Math.random() * availableSquares.length);
-        const index = availableSquares[randomIndex];
-
-        return index;
-    }
-
     async function  handleClick(index) {
         gameStore.makeMove(index);
         const chat = get(gameStore).chat;
