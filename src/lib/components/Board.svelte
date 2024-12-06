@@ -23,7 +23,7 @@
     function handleClick(index) {
         gameStore.makeMove(index);
         const computerMove = getComputerMove(get(gameStore));
-        if (computerMove) {
+        if (computerMove !== undefined) {
             gameStore.makeMove(computerMove);
         }
     }
